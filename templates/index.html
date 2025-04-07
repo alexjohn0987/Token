@@ -1,64 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram-FB Token Extractor 2025</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Instagram Token Extractor</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { background: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 150px; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #3897f0; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 4px; }
+        .success { background: #e6f7ee; border: 1px solid #a3e9c0; }
+        .error { background: #ffebee; border: 1px solid #ffcdd2; }
+        .token { word-break: break-all; font-family: monospace; }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Instagram-Facebook Token Extractor</h1>
-        <p class="subtitle">2025 Working Method</p>
+        <p>Paste your Facebook cookies below to extract the Instagram token</p>
         
         <form method="POST">
-            <div class="form-group">
-                <label for="cookies">Facebook Cookies:</label>
-                <textarea id="cookies" name="cookies" required placeholder="datr=xyz...; c_user=123...; xs=abc...; fr=def...">{{ cookie_input }}</textarea>
-            </div>
-            
-            <div class="form-group">
-                <button type="submit">Extract Token</button>
-            </div>
+            <textarea name="cookies" placeholder="datr=xyz...; c_user=123...; xs=abc...; fr=def..." required></textarea>
+            <button type="submit">Extract Token</button>
         </form>
-
+        
         {% if token %}
-        <div class="result-box success">
-            <h3>Success! Extracted Token:</h3>
-            <div class="token-display">{{ token }}</div>
-            <div class="copy-section">
-                <button onclick="copyToClipboard()" class="copy-btn">Copy Token</button>
-                <span id="copy-status"></span>
-            </div>
+        <div class="result success">
+            <h3>Success! Your Token:</h3>
+            <div class="token">{{ token }}</div>
+            <button onclick="navigator.clipboard.writeText('{{ token }}')">Copy Token</button>
         </div>
         {% endif %}
-
+        
         {% if error %}
-        <div class="result-box error">
+        <div class="result error">
             <h3>Error:</h3>
             <p>{{ error }}</p>
-            <div class="tips">
-                <strong>Tips:</strong>
-                <ul>
-                    <li>Use fresh cookies (login within 24 hours)</li>
-                    <li>Include all required cookies: c_user, xs, fr</li>
-                    <li>Try different user agent if blocked</li>
-                </ul>
-            </div>
+            <h4>Troubleshooting Tips:</h4>
+            <ul>
+                <li>Use fresh cookies (login within 24 hours)</li>
+                <li>Make sure all required cookies are included</li>
+                <li>Check Instagram permissions in Facebook settings</li>
+            </ul>
         </div>
         {% endif %}
     </div>
-
-    <script>
-        function copyToClipboard() {
-            const token = "{{ token }}";
-            navigator.clipboard.writeText(token).then(() => {
-                document.getElementById('copy-status').textContent = 'Copied!';
-                setTimeout(() => {
-                    document.getElementById('copy-status').textContent = '';
-                }, 2000);
-            });
-        }
-    </script>
 </body>
 </html>
