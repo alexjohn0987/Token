@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram-FB Token Extractor 2025</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Instagram-Facebook Token Extractor</h1>
+        <p class="subtitle">2025 Working Method</p>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="cookies">Facebook Cookies:</label>
+                <textarea id="cookies" name="cookies" required placeholder="datr=xyz...; c_user=123...; xs=abc...; fr=def...">{{ cookie_input }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit">Extract Token</button>
+            </div>
+        </form>
+
+        {% if token %}
+        <div class="result-box success">
+            <h3>Success! Extracted Token:</h3>
+            <div class="token-display">{{ token }}</div>
+            <div class="copy-section">
+                <button onclick="copyToClipboard()" class="copy-btn">Copy Token</button>
+                <span id="copy-status"></span>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="result-box error">
+            <h3>Error:</h3>
+            <p>{{ error }}</p>
+            <div class="tips">
+                <strong>Tips:</strong>
+                <ul>
+                    <li>Use fresh cookies (login within 24 hours)</li>
+                    <li>Include all required cookies: c_user, xs, fr</li>
+                    <li>Try different user agent if blocked</li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const token = "{{ token }}";
+            navigator.clipboard.writeText(token).then(() => {
+                document.getElementById('copy-status').textContent = 'Copied!';
+                setTimeout(() => {
+                    document.getElementById('copy-status').textContent = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
